@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Les Cousines à Paris</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Jost:wght@300..600&display=swap" rel="stylesheet">
+<style>
+/* Concept: een theater-avond in Parijs. Het hele weekend is een podium; elke dag is een rood fluwelen gordijn onder een gouden festoen. Eén gewaagde zet: de gordijnen. De rest blijft rustig: burgundy, crème en goud. */
+:root {
+  --bg: #3a0a19;
+  --bg-deep: #26050f;
+  --wine: #5e1229;
+  --curtain: #a81c47;
+  --rose: #c93a6c;
+  --rose-soft: #f2a4c0;
+  --rose-deep: #a32656;
+  --gold: #d6b06a;
+  --gold-bright: #f3dc95;
+  --cream: #f6ecda;
+  --cream-dim: #dccdb3;
+  --ink: #3a0a19;
+  --display: "Bodoni Moda", "Bodoni 72", Didot, "Playfair Display", Georgia, serif;
+  --body: Jost, "Avenir Next", "Century Gothic", system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  background-image: radial-gradient(ellipse 120% 40rem at 50% -8rem, #66153a 0, transparent 70%);
+  background-repeat: no-repeat;
+  color: var(--cream);
+  font: 400 1rem/1.55 var(--body);
+  padding-block: 1.2rem 3rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  -webkit-text-size-adjust: 100%;
+}
+
+.wrap { max-width: 34rem; margin: 0 auto; display: grid; gap: 2.2rem; }
+
+:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+
+/* ---------- Hero ---------- */
+.hero { text-align: center; display: grid; gap: .9rem; justify-items: center; }
+.bulbs {
+  width: 100%; height: 14px;
+  background: radial-gradient(circle at 50% 50%, var(--gold-bright) 0 3px, rgba(243,220,149,.28) 4px 6px, transparent 7px) 0 0 / 24px 14px repeat-x;
+  animation: glow 2.6s ease-in-out infinite alternate;
+}
+@keyframes glow { from { opacity: .55; } to { opacity: 1; } }
+.tower { width: 74px; height: auto; color: var(--gold); margin-top: .4rem; }
+.kicker { margin: 0; font-size: .78rem; letter-spacing: .24em; text-transform: uppercase; color: var(--rose-soft); }
+h1 { margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(2.5rem, 12vw, 3.5rem); line-height: 1; letter-spacing: .01em; text-wrap: balance; }
+h1 em { display: block; font-style: italic; font-weight: 500; color: var(--gold-bright); font-size: .62em; margin-top: .25rem; }
+.lead { margin: 0; max-width: 24rem; color: var(--cream-dim); text-wrap: balance; }
+.testpill { margin: 0; padding: .25rem .8rem; border: 1px solid var(--rose-soft); color: var(--rose-soft); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; }
+
+.countdown { width: 100%; display: grid; gap: .8rem; margin-top: .6rem; }
+.cd-label { margin: 0; font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+.cd-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; }
+.tile {
+  background: rgba(0,0,0,.22); border: 1px solid var(--gold); outline: 1px solid rgba(214,176,106,.35); outline-offset: 3px;
+  padding: .7rem .2rem .5rem; margin: 3px;
+}
+.tile b { display: block; font-family: var(--display); font-weight: 600; font-size: clamp(1.7rem, 8vw, 2.2rem); line-height: 1.1; color: var(--gold-bright); font-variant-numeric: tabular-nums; }
+.tile span { display: block; font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--cream-dim); }
+.cd-msg { margin: 0; font-family: var(--display); font-style: italic; font-size: 1.1rem; color: var(--cream); text-wrap: balance; }
+
+/* ---------- Titels ---------- */
+.sec-title { display: grid; gap: .5rem; justify-items: center; margin: 0 0 1rem; text-align: center; }
+.sec-title h2 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 1.6rem; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-bright); }
+.sec-title::after { content: ""; width: 6rem; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.label { margin: 0 0 .35rem; font-size: .72rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--rose-soft); }
+
+/* ---------- Gordijn per dag ---------- */
+#days { display: grid; gap: 1.6rem; }
+.stage { position: relative; overflow: hidden; background: radial-gradient(ellipse 90% 70% at 50% 0, #6a1836 0, var(--bg-deep) 78%); border: 1px solid rgba(214,176,106,.55); }
+.curtain {
+  position: absolute; top: 0; bottom: 0; width: 50%; z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.4), transparent 32%, transparent 78%, rgba(0,0,0,.35)),
+    repeating-linear-gradient(90deg, #8c1434 0 11px, var(--curtain) 11px 24px, #741029 24px 36px, #9d1a41 36px 47px);
+  transition: width 1.9s cubic-bezier(.7,0,.2,1);
+}
+.curtain.l { left: 0; box-shadow: inset -7px 0 10px rgba(0,0,0,.4); }
+.curtain.r { right: 0; box-shadow: inset 7px 0 10px rgba(0,0,0,.4); background-position: right top; }
+.curtain::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 12px; background: repeating-linear-gradient(90deg, var(--gold) 0 3px, transparent 3px 7px); opacity: .85; }
+.stage.open .curtain { width: 8%; }
+
+.valance {
+  position: relative; z-index: 3; display: flex; justify-content: space-between; align-items: baseline; gap: .6rem; flex-wrap: wrap;
+  padding: .75rem 1rem .85rem; background: linear-gradient(#92153a, #6e0f2b); border-bottom: 3px solid var(--gold);
+  font-family: var(--display); text-transform: uppercase; letter-spacing: .14em; color: var(--gold-bright);
+}
+.valance .dow { font-size: 1.15rem; font-weight: 700; }
+.valance .dt { font-size: .82rem; font-weight: 500; }
+.valance::after {
+  content: ""; position: absolute; left: 0; right: 0; top: calc(100% + 3px); height: 14px;
+  background: radial-gradient(circle at 50% 0, #6e0f2b 0 13px, transparent 14px) 0 0 / 28px 14px repeat-x;
+  filter: drop-shadow(0 1.5px 0 var(--gold));
+}
+
+.teaser { position: relative; z-index: 2; display: grid; place-items: center; padding: 3rem 1rem 3.2rem; text-align: center; }
+.plaque { max-width: 17rem; padding: 1rem 1.1rem; background: rgba(38,5,15,.9); border: 1px solid var(--gold); outline: 1px solid rgba(214,176,106,.4); outline-offset: 3px; }
+.plaque .tz { margin: 0 0 .6rem; font-family: var(--display); font-style: italic; font-size: 1.1rem; line-height: 1.4; color: var(--cream); text-wrap: balance; }
+.plaque .tw { margin: 0; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--rose-soft); }
+
+.scene { position: relative; z-index: 2; padding: 1.4rem 10% 1.7rem; opacity: 0; transform: translateY(8px); transition: opacity .9s ease .9s, transform .9s ease .9s; }
+.scene.in { opacity: 1; transform: none; }
+.dtitle { margin: 0 0 1.1rem; font-family: var(--display); font-style: italic; font-weight: 500; font-size: 1.5rem; color: var(--gold-bright); text-wrap: balance; }
+.sched { list-style: none; margin: 0; padding: 0; display: grid; gap: .85rem; }
+.sched li { display: grid; grid-template-columns: 4.6rem minmax(0, 1fr); gap: .8rem; align-items: baseline; }
+.sched li + li { padding-top: .85rem; border-top: 1px dotted rgba(214,176,106,.38); }
+.t { font-family: var(--display); font-weight: 600; font-size: .98rem; color: var(--gold-bright); font-variant-numeric: tabular-nums; }
+.h { font-weight: 500; color: var(--cream); min-width: 0; overflow-wrap: anywhere; }
+.s { display: block; font-weight: 400; font-style: italic; font-size: .92rem; color: var(--rose-soft); }
+
+/* ---------- Opdrachten op papier ---------- */
+.after { display: grid; gap: 1.2rem; margin-top: 1.2rem; }
+.after:empty, #slot-a1:empty, #slot-a2:empty { display: none; }
+.paper {
+  background: var(--cream); color: var(--ink); padding: 1.4rem 1.25rem;
+  border: 1px solid var(--gold); box-shadow: inset 0 0 0 4px var(--cream), inset 0 0 0 5px var(--gold);
+}
+.paper .label { color: var(--rose-deep); }
+.paper h3 { margin: 0 0 .7rem; font-family: var(--display); font-weight: 700; font-size: 1.45rem; line-height: 1.2; color: var(--wine); text-wrap: balance; }
+.paper p { margin: 0 0 .8rem; }
+.rules { list-style: none; padding: 0; margin: 0 0 .9rem; display: grid; gap: .5rem; }
+.rules li { display: grid; grid-template-columns: 1.8rem minmax(0, 1fr); gap: .3rem; align-items: start; }
+.rule-last { font-family: var(--display); font-style: italic; font-size: 1.08rem; color: var(--wine); margin: 0; }
+
+.sealed { display: flex; gap: 1rem; align-items: center; padding: 1rem 1.1rem; border: 1px dashed var(--gold); background: rgba(0,0,0,.2); }
+.sealed p { margin: 0; }
+.sealed .sealed-t { font-family: var(--display); font-style: italic; color: var(--cream); }
+.seal { flex: none; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #e0638f, var(--rose-deep) 70%); box-shadow: 0 2px 0 rgba(0,0,0,.35), inset 0 0 0 3px rgba(255,255,255,.14); }
+
+.dots { display: flex; gap: .45rem; margin: 0 0 1rem; }
+.dots i { width: .7rem; height: .7rem; border-radius: 50%; border: 1px solid var(--wine); }
+.dots i.on { background: var(--wine); }
+.spot { padding-top: .9rem; margin-top: .9rem; border-top: 1px solid var(--gold); animation: pop 1.6s ease-out; }
+.spot h4 { margin: 0 0 .5rem; font-family: var(--display); font-size: 1.25rem; color: var(--wine); }
+.spot p { margin: 0; }
+.spot .label { margin-bottom: .15rem; }
+@keyframes pop { from { background: rgba(214,176,106,.5); } to { background: transparent; } }
+.clue { padding-top: .9rem; margin-top: .9rem; border-top: 1px solid var(--gold); }
+.rhyme { margin: 0 0 1rem; font-family: var(--display); font-style: italic; font-size: 1.12rem; line-height: 1.55; color: var(--ink); }
+.row { display: flex; gap: .6rem; flex-wrap: wrap; }
+.row input { flex: 1 1 10rem; min-width: 0; font: inherit; font-size: 16px; padding: .8rem .9rem; border: 1px solid var(--wine); border-radius: 2px; background: #fffaf0; color: var(--ink); }
+.row.shake { animation: shake .4s; }
+@keyframes shake { 25% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 75% { transform: translateX(-3px); } }
+.msg { margin: .6rem 0 0; min-height: 1.4em; font-size: .92rem; color: var(--rose-deep); }
+.finale { margin-top: 1rem; padding: 1.1rem 1.1rem 1.2rem; background: var(--wine); color: var(--cream); border: 1px solid var(--gold); animation: pop 1.6s ease-out; }
+.finale h4 { margin: 0 0 .5rem; font-family: var(--display); font-style: italic; font-size: 1.4rem; color: var(--gold-bright); }
+.finale p { margin: 0 0 .9rem; }
+
+/* ---------- Knoppen ---------- */
+.btn {
+  display: inline-flex; justify-content: center; align-items: center; min-height: 44px; padding: .7rem 1.1rem;
+  font: 600 .86rem var(--body); letter-spacing: .1em; text-transform: uppercase; text-decoration: none; text-align: center;
+  border: 1px solid var(--gold); border-radius: 2px; cursor: pointer; background: transparent; color: var(--cream);
+}
+.btn.gold { background: linear-gradient(180deg, var(--gold-bright), var(--gold)); color: var(--bg-deep); border-color: var(--gold-bright); }
+.paper .btn { background: var(--wine); color: var(--cream); border-color: var(--wine); }
+
+/* ---------- Verblijf ---------- */
+.card { border: 1px solid rgba(214,176,106,.6); background: rgba(0,0,0,.2); padding: 1.3rem 1.2rem; display: grid; gap: .9rem; }
+.addr { margin: 0; font-family: var(--display); font-weight: 500; font-size: 1.4rem; line-height: 1.3; color: var(--cream); }
+.addr span { display: block; font-size: 1rem; font-family: var(--body); color: var(--cream-dim); }
+.btns { display: flex; gap: .6rem; flex-wrap: wrap; }
+.btns .btn { flex: 1 1 10rem; }
+.copymsg { margin: 0; min-height: 1.3em; font-size: .9rem; color: var(--rose-soft); }
+.info-grid { display: grid; gap: 1rem; margin-top: 1.1rem; }
+.info { border: 1px solid rgba(214,176,106,.35); padding: 1rem 1.1rem; background: rgba(246,236,218,.05); }
+.info p { margin: 0; }
+.big112 { font-family: var(--display); font-weight: 700; font-size: 2.6rem; line-height: 1; color: var(--rose-soft); }
+.info a { color: var(--gold-bright); }
+
+/* ---------- Voet ---------- */
+.foot { text-align: center; display: grid; gap: 1.4rem; justify-items: center; }
+.foot .santé { margin: 0; font-family: var(--display); font-style: italic; font-size: 1.3rem; color: var(--gold-bright); }
+.gm { width: 100%; max-width: 20rem; border-top: 1px solid rgba(214,176,106,.25); padding-top: .9rem; text-align: left; }
+.gm summary { cursor: pointer; text-align: center; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--cream-dim); list-style: none; }
+.gm summary::-webkit-details-marker { display: none; }
+.gm-body, .gm-tools { margin-top: .9rem; display: grid; gap: .5rem; }
+.gm label { font-size: .85rem; color: var(--cream-dim); }
+.gm .row input { background: rgba(0,0,0,.3); color: var(--cream); border-color: var(--gold); }
+.gm .msg { color: var(--rose-soft); }
+.gm-tools p { margin: 0; font-size: .92rem; color: var(--cream-dim); }
+
+@media (prefers-reduced-motion: reduce) {
+  .bulbs, .spot, .finale, .row.shake { animation: none; }
+  .curtain, .scene { transition: none; }
+}
+body{margin:0}
+</style>
+</head>
+<body>
+
+
+<main class="wrap">
+  <header class="hero">
+    <div class="bulbs" aria-hidden="true"></div>
+    <svg class="tower" viewBox="0 0 120 220" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M60 4V30"/>
+      <path d="M60 30C58 60 52 90 40 130C34 150 24 185 14 214"/>
+      <path d="M60 30C62 60 68 90 80 130C86 150 96 185 106 214"/>
+      <path d="M51 80H69M42 122H78M30 168H90"/>
+      <path d="M52 80L78 122M68 80L42 122M42 122L90 168M78 122L30 168"/>
+      <path d="M32 214C32 180 88 180 88 214"/>
+    </svg>
+    <p class="kicker">Nichtjesweekend · 20 t/m 22 november 2026</p>
+    <h1>Les Cousines <em>à Paris</em></h1>
+    <p class="lead">Acht nichtjes, één weekend, nul verplichtingen. Het doek gaat op, de koffers gaan dicht.</p>
+    <p class="testpill" id="testpill" hidden>Spelleidermodus</p>
+
+    <section class="countdown" aria-label="Aftellen naar vertrek">
+      <p class="cd-label">Vertrek vrijdag 20 november · 09:00</p>
+      <div class="cd-tiles" id="cd-tiles" role="timer">
+        <div class="tile"><b id="cd-d">00</b><span>dagen</span></div>
+        <div class="tile"><b id="cd-h">00</b><span>uren</span></div>
+        <div class="tile"><b id="cd-m">00</b><span>min</span></div>
+        <div class="tile"><b id="cd-s">00</b><span>sec</span></div>
+      </div>
+      <p class="cd-msg" id="cd-msg"></p>
+    </section>
+  </header>
+
+  <section aria-labelledby="t-weekend">
+    <div class="sec-title"><h2 id="t-weekend">Drie aktes</h2></div>
+    <div id="days"></div>
+  </section>
+
+  <section aria-labelledby="t-verblijf">
+    <div class="sec-title"><h2 id="t-verblijf">Ons verblijf</h2></div>
+    <div class="card">
+      <p class="addr" id="addr">13bis rue Beccaria
+        <span>75012 Parijs · 12e arrondissement</span>
+        <span>Frankrijk</span>
+      </p>
+      <div class="btns">
+        <a class="btn gold" id="maps" href="https://www.google.com/maps/search/?api=1&query=13bis%20rue%20Beccaria%2C%2075012%20Paris%2C%20France" target="_blank" rel="noopener">Open in Maps</a>
+        <button class="btn" id="copy" type="button">Kopieer adres</button>
+      </div>
+      <p class="copymsg" id="copymsg" role="status"></p>
+    </div>
+    <div class="info-grid">
+      <div class="info">
+        <p class="label">Noodnummer</p>
+        <p class="big112">112</p>
+        <p>Het Europese alarmnummer, ook in Frankrijk. Bel <a href="tel:112">112</a> bij brand, ongeval of als iemand direct hulp nodig heeft.</p>
+      </div>
+      <div class="info">
+        <p class="label">Metrotip</p>
+        <p>In de buurt liggen onder meer Gare de Lyon (lijn 1 en 14) en Ledru-Rollin (lijn 8). Check in je kaartapp welke het kortst loopt vanaf de voordeur. Een Navigo Easy-kaart of een carnet tickets scheelt gedoe bij het poortje. Op vrijdag- en zaterdagnacht rijdt de metro door tot ongeveer 02:15, de andere nachten stopt hij rond 01:15.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p class="santé">Santé, mesdames.</p>
+    <details class="gm" id="gm">
+      <summary>Spelleider</summary>
+      <form class="gm-body" id="gm-form" autocomplete="off">
+        <label for="gm-code">Code</label>
+        <div class="row">
+          <input id="gm-code" type="text" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="go">
+          <button class="btn" type="submit">Open</button>
+        </div>
+        <p class="msg" id="gm-msg" role="status"></p>
+      </form>
+      <div class="gm-tools" id="gm-tools" hidden>
+        <p>Alle dagen en opdrachten staan open om te testen.</p>
+        <div class="row">
+          <button class="btn" type="button" id="gm-reset">Reset fotoopdracht</button>
+          <button class="btn" type="button" id="gm-off">Terug naar echte tijd</button>
+        </div>
+        <p class="msg" id="gm-msg2" role="status"></p>
+      </div>
+    </details>
+  </footer>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var P = function (s) { return Date.parse(s); };
+
+  /* Parijse tijd in november = UTC+01:00 (wintertijd begint op 25 oktober 2026) */
+  var T = {
+    depart: P('2026-11-20T09:00:00+01:00'),
+    end:    P('2026-11-22T12:00:00+01:00'),
+    a1:     P('2026-11-21T09:00:00+01:00'),
+    a2:     P('2026-11-21T10:30:00+01:00')
+  };
+  var MAPS = 'https://www.google.com/maps/search/?api=1&query=13bis%20rue%20Beccaria%2C%2075012%20Paris%2C%20France';
+  var ADDRESS = '13bis rue Beccaria, 75012 Parijs, Frankrijk';
+
+  var DAYS = [
+    {
+      key: 'vr', dow: 'Vrijdag', date: '20 november', open: P('2026-11-20T00:00:00+01:00'),
+      opens: 'vrijdag 20 november om 00:00',
+      teaser: 'Acht koffers, één bestemming. Wat begint met vlaai en eindigt met een kurk?',
+      title: 'Bonsoir, Parijs',
+      items: [
+        { t: '08:00', h: 'Verzamelen op Boshoven' },
+        { t: '09:00', h: 'Vertrek naar Parijs' },
+        { t: '17:00–​18:30', h: 'Klaarmaken voor het diner' },
+        { t: '19:15', h: 'Diner', s: 'Typisch Frans' }
+      ]
+    },
+    {
+      key: 'za', dow: 'Zaterdag', date: '21 november', open: P('2026-11-21T00:00:00+01:00'),
+      opens: 'zaterdag 21 november om 00:00',
+      teaser: 'Een jungle zonder lianen. Een safari zonder zebra’s. Alleen wie goed kijkt, ziet wat er gevonden moet worden.',
+      title: 'Buit en gevels',
+      items: [
+        { t: '08:00', h: 'Ontbijt' },
+        { t: '09:00', h: 'Activiteit: Vintagejungle', a: 'a1' },
+        { t: '11:00', h: 'Lunch / activiteit: Gevelsafari', a: 'a2' },
+        { t: '19:00', h: 'Diner', s: 'Typisch niet-Frans' }
+      ]
+    },
+    {
+      key: 'zo', dow: 'Zondag', date: '22 november', open: P('2026-11-22T00:00:00+01:00'),
+      opens: 'zondag 22 november om 00:00',
+      teaser: 'Hoe lang duurt het laatste ontbijt als niemand wil opstaan? Zondag weten we het.',
+      title: 'Au revoir, à bientôt',
+      items: [
+        { t: '??:??', h: 'Ontbijt / vroege lunch', s: 'Het tijdstip bepalen we samen, afhankelijk van de avond ervoor' },
+        { t: '12:00', h: 'Uitchecken en vertrekken naar huis' }
+      ]
+    }
+  ];
+
+  var SPOTS = [
+    {
+      name: 'Sacré-Cœur',
+      alias: ['sacrecoeur', 'sacrecoeurbasiliek', 'basiliekvansacrecoeur', 'basiliquedusacrecoeur', 'heilighart'],
+      rhyme: ['Een heuvel vol schilders, een koepel als een kroon,', 'wit als een bruid, voor heel Parijs een troon.', 'Klim de trappen of neem het treintje omhoog:', 'mijn naam bevat een hart en ik houd alles in het oog.'],
+      photo: 'Groepsfoto op de trappen, de koepel achter jullie. De buit staat vooraan, en alle acht kijken alsof ze zojuist een erfenis hebben ontvangen.'
+    },
+    {
+      name: 'Arc de Triomphe',
+      alias: ['arcdetriomphe', 'arcdetriomf', 'triomfboog', 'arcdetriomphedeletoile'],
+      rhyme: ['Twaalf lanen stromen samen, de auto’s draaien in het rond,', 'onder een grote boog brandt een vlam op de grond.', 'Napoleon bestelde hem groot, voor zijn leger vol moed,', 'nu steken acht nichtjes over (neem de tunnel!) en dat gaat goed.'],
+      photo: 'Alle acht in een rij, de boog in beeld. De buit krijgt een officieel eresaluut.'
+    },
+    {
+      name: 'Eiffeltoren',
+      alias: ['eiffeltoren', 'toureiffel', 'eiffeltower', 'eiffel'],
+      rhyme: ['Driehonderd meter ijzer, als kant gegoten,', '’s avonds flonker ik en de hele stad heeft genoten.', 'Eerst noemden ze mij een monster van staal,', 'nu sta ik op elke ansichtkaart, helemaal.'],
+      photo: 'Perspectieffoto: hou de buit zo omhoog dat het lijkt alsof hij de toren draagt. De zeven anderen poseren als modellen op een catwalk, zo serieus mogelijk.'
+    },
+    {
+      name: 'Louvre',
+      alias: ['louvre', 'museedulouvre', 'louvremuseum', 'hetlouvre'],
+      rhyme: ['Eens woonde hier een koning, nu hangt de wereld aan de muur,', 'een glazen piramide bewaakt de deur, uur na uur.', 'Een dame met een raadselachtige lach', 'wordt hier bekeken, dag na dag.'],
+      photo: 'Maak een schilderij. Alle acht in een kunstzinnige pose, de buit in het midden, een strenge museumblik. Verzin een titel voor het kunstwerk.'
+    },
+    {
+      name: 'Centre Pompidou',
+      alias: ['centrepompidou', 'centredepompidou', 'pompidou', 'pompidoucentrum'],
+      rhyme: ['Mijn binnenste zit buiten, dat is mijn trucje,', 'kleurige buizen als een reusachtig puzzeltje.', 'Een roltrap kruipt omhoog in een glazen buis,', 'op het plein ervoor voelt iedereen zich thuis.'],
+      photo: 'Moderne kunst: vorm samen één levend kunstwerk met de buit als onderwerp. Hoe abstracter, hoe beter.'
+    },
+    {
+      name: 'Notre-Dame',
+      alias: ['notredame', 'notredamedeparis', 'kathedraalnotredame', 'dekathedraalnotredame', 'onzelievevrouwe'],
+      rhyme: ['Op een eiland in de Seine, als een schip dat ligt te wachten,', 'grijnzen waterspuwers neer met bijna duivelse krachten.', 'Een klokkenluider met een bult kende mijn trappen en bellen,', 'na de brand ben ik herrezen, en dat kon geen mens voorspellen.'],
+      photo: 'Poseer als waterspuwers rondom de buit. Grijns zo duivels mogelijk.'
+    }
+  ];
+
+  var WRONG = [
+    'Mmm, dat is het niet. Lees het rijmpje nog eens.',
+    'Bijna Parijs, maar niet helemaal. Probeer opnieuw.',
+    'Nee hoor. Overleg even met de groep.',
+    'Niet die plek. Nog een keer!'
+  ];
+
+  var state = { test: false, huntStep: 0, wrong: 0 };
+
+  /* ---------- Antwoorden controleren ---------- */
+  function norm(s) {
+    return String(s).toLowerCase().replace(/œ/g, 'oe').replace(/æ/g, 'ae')
+      .normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
+  }
+  function dist(a, b) {
+    var i, j, d = [];
+    for (i = 0; i <= a.length; i++) { d[i] = [i]; }
+    for (j = 1; j <= b.length; j++) { d[0][j] = j; }
+    for (i = 1; i <= a.length; i++) {
+      for (j = 1; j <= b.length; j++) {
+        var c = a[i - 1] === b[j - 1] ? 0 : 1;
+        d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + c);
+        if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
+          d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+        }
+      }
+    }
+    return d[a.length][b.length];
+  }
+  function matches(input, aliases) {
+    var n = norm(input);
+    if (n.length < 3) { return false; }
+    return aliases.some(function (al) {
+      if (n === al) { return true; }
+      if (al.length >= 6 && n.indexOf(al) !== -1) { return true; }
+      var tol = al.length <= 5 ? 0 : (al.length <= 9 ? 1 : 2);
+      return dist(n, al) <= tol;
+    });
+  }
+
+  /* ---------- Opbouw ---------- */
+  function buildDays() {
+    var box = $('#days');
+    DAYS.forEach(function (d, i) {
+      var el = document.createElement('article');
+      el.id = 'day-' + d.key;
+      el.innerHTML =
+        '<div class="stage closed" id="stage-' + i + '">' +
+          '<div class="curtain l"></div><div class="curtain r"></div>' +
+          '<header class="valance"><span class="dow">' + d.dow + '</span><span class="dt">' + d.date + '</span></header>' +
+          '<div class="teaser"><div class="plaque"><p class="tz">' + d.teaser + '</p><p class="tw">Opent ' + d.opens + '</p></div></div>' +
+          '<div class="scene" hidden></div>' +
+        '</div>' +
+        (i === 1 ? '<div class="after"><div id="slot-a1"></div><div id="slot-a2"></div></div>' : '');
+      box.appendChild(el);
+    });
+  }
+
+  function sceneHTML(i) {
+    var d = DAYS[i];
+    var li = d.items.map(function (it) {
+      return '<li><span class="t">' + it.t + '</span><span class="h">' + it.h +
+        (it.s ? '<span class="s">' + it.s + '</span>' : '') +
+        (it.a ? '<span class="s" data-note="' + it.a + '"></span>' : '') +
+        '</span></li>';
+    }).join('');
+    return '<h2 class="dtitle">' + d.title + '</h2><ol class="sched">' + li + '</ol>';
+  }
+
+  function setDayOpen(i, open) {
+    var st = $('#stage-' + i), scene = $('.scene', st), tz = $('.teaser', st);
+    if (open) {
+      scene.innerHTML = sceneHTML(i);
+      scene.hidden = false; tz.hidden = true;
+      st.classList.remove('closed'); st.classList.add('open');
+      requestAnimationFrame(function () { requestAnimationFrame(function () { scene.classList.add('in'); }); });
+    } else {
+      scene.hidden = true; scene.innerHTML = ''; scene.classList.remove('in');
+      tz.hidden = false; st.classList.add('closed'); st.classList.remove('open');
+    }
+  }
+
+  /* ---------- Opdrachten ---------- */
+  function a1HTML() {
+    return '<section class="paper" aria-labelledby="a1-t">' +
+      '<p class="label">Opdracht · Vintagejungle</p>' +
+      '<h3 id="a1-t">Eén ding dat je nooit zou kopen</h3>' +
+      '<p>Struin over de vlooienmarkt en zoek één object dat je normaal gesproken écht nooit zou kopen.</p>' +
+      '<ul class="rules">' +
+        '<li><span aria-hidden="true">👜</span><span>Lelijk, kitsch, vreemd, ouderwets of totaal nutteloos? Juist goed!</span></li>' +
+        '<li><span aria-hidden="true">🎨</span><span>Denk out of the box en verras ons.</span></li>' +
+        '<li><span aria-hidden="true">💶</span><span>Het bedrag bepaal je helemaal zelf.</span></li>' +
+      '</ul>' +
+      '<p class="rule-last">De enige regel: je moet kunnen uitleggen waarom juist dít object met jou mee naar huis moest.</p>' +
+    '</section>';
+  }
+  function a2HTML() {
+    return '<section class="paper" aria-labelledby="a2-t">' +
+      '<p class="label">Opdracht · Gevelsafari</p>' +
+      '<h3 id="a2-t">Zes plekken, één buit</h3>' +
+      '<p>Alle acht samen. Op iedere foto moet het item staan dat je op de vlooienmarkt hebt gekocht.</p>' +
+      '<p>Zes rijmpjes wijzen de weg. Raad de plek, vul hem in, en de foto-opdracht voor die plek verschijnt.</p>' +
+      '<div id="hunt"></div>' +
+    '</section>';
+  }
+  function sealedHTML(k) {
+    var a1 = k === 'a1';
+    return '<div class="sealed"><span class="seal" aria-hidden="true"></span><div>' +
+      '<p class="label">Opdracht · ' + (a1 ? 'Vintagejungle' : 'Gevelsafari') + '</p>' +
+      '<p class="sealed-t">Verzegeld tot ' + (a1 ? '09:00' : '10:30') + '. ' + (a1 ? 'Niet gluren.' : 'De rijmpjes wachten.') + '</p>' +
+    '</div></div>';
+  }
+
+  var slots = { a1: 'none', a2: 'none' };
+
+  function renderSlot(k) {
+    var el = $('#slot-' + k), s = slots[k];
+    if (s === 'none') { el.innerHTML = ''; return; }
+    if (s === 'sealed') { el.innerHTML = sealedHTML(k); return; }
+    el.innerHTML = k === 'a1' ? a1HTML() : a2HTML();
+    if (k === 'a2') { renderHunt(); }
+  }
+
+  function renderHunt() {
+    var box = $('#hunt');
+    if (!box) { return; }
+    var h = '<div class="dots" aria-label="Voortgang">';
+    for (var n = 0; n < SPOTS.length; n++) { h += '<i class="' + (n < state.huntStep ? 'on' : '') + '"></i>'; }
+    h += '</div>';
+    for (var i = 0; i < state.huntStep; i++) {
+      h += '<div class="spot" id="spot-' + (i + 1) + '"><p class="label">Plek ' + (i + 1) + ' van 6 gevonden</p><h4>' + SPOTS[i].name + '</h4>' +
+        '<p class="label" style="margin-top:.6rem">Foto-opdracht</p><p>' + SPOTS[i].photo + '</p></div>';
+    }
+    if (state.huntStep < SPOTS.length) {
+      var c = SPOTS[state.huntStep];
+      h += '<form class="clue" id="clue-form" autocomplete="off"><p class="label">Aanwijzing ' + (state.huntStep + 1) + ' van 6</p>' +
+        '<p class="rhyme">' + c.rhyme.join('<br>') + '</p>' +
+        '<div class="row" id="clue-row"><input id="ans" type="text" aria-label="Jullie antwoord" placeholder="Welke plek is dit?" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="go">' +
+        '<button class="btn" type="submit">Controleer</button></div><p class="msg" id="clue-msg" role="status"></p></form>';
+    } else {
+      h += '<div class="finale"><h4>Bravo, mesdames.</h4>' +
+        '<p>Zes plekken, zes foto’s en één verzameling vlooienmarktbuit. Terug naar het verblijf: schoenen uit, benen omhoog. Diner om 19:00, typisch niet-Frans.</p>' +
+        '<a class="btn gold" href="' + MAPS + '" target="_blank" rel="noopener">Open verblijf in Maps</a></div>';
+    }
+    box.innerHTML = h;
+  }
+
+  function updateAssignments() {
+    var f = flags();
+    ['a1', 'a2'].forEach(function (k) {
+      var s = !f.days[1] ? 'none' : (f[k] ? 'open' : 'sealed');
+      if (slots[k] !== s) { slots[k] = s; renderSlot(k); }
+    });
+    document.querySelectorAll('[data-note]').forEach(function (n) {
+      var k = n.getAttribute('data-note');
+      n.textContent = slots[k] === 'open' ? 'Opdracht staat klaar, zie hieronder' : 'Opdracht verzegeld tot ' + (k === 'a1' ? '09:00' : '10:30');
+    });
+  }
+
+  /* ---------- Tijd ---------- */
+  function flags() {
+    var n = Date.now(), t = state.test;
+    return { days: DAYS.map(function (d) { return t || n >= d.open; }), a1: t || n >= T.a1, a2: t || n >= T.a2 };
+  }
+  var shownDays = [false, false, false];
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function countdown() {
+    var now = Date.now(), diff = T.depart - now, tiles = $('#cd-tiles'), msg = $('#cd-msg');
+    if (diff > 0) {
+      tiles.hidden = false;
+      var d = Math.floor(diff / 864e5), h = Math.floor(diff % 864e5 / 36e5), m = Math.floor(diff % 36e5 / 6e4), s = Math.floor(diff % 6e4 / 1000);
+      $('#cd-d').textContent = pad(d); $('#cd-h').textContent = pad(h); $('#cd-m').textContent = pad(m); $('#cd-s').textContent = pad(s);
+      var days = diff / 864e5, t;
+      if (days > 14) { t = 'Nog even geduld. Begin alvast met het kiezen van een outfit voor elk uur van de dag.'; }
+      else if (days > 7) { t = 'Het wordt serieus. Check je identiteitsbewijs en je schoenen.'; }
+      else if (days > 1) { t = 'Koffer pakken. Ja, je neemt te veel mee. Dat doen we allemaal.'; }
+      else { t = 'Het is bijna zover. Wekker zetten, tas klaar, glimlach aan.'; }
+      msg.textContent = t;
+    } else {
+      tiles.hidden = true;
+      msg.textContent = now < T.end ? 'We zijn onderweg. Bon voyage, mesdames!' : 'Merci voor een prachtig weekend.';
+    }
+  }
+
+  function tick() {
+    countdown();
+    var f = flags();
+    DAYS.forEach(function (d, i) {
+      if (shownDays[i] !== f.days[i]) { shownDays[i] = f.days[i]; setDayOpen(i, f.days[i]); }
+    });
+    updateAssignments();
+  }
+
+  /* ---------- Formulieren en knoppen ---------- */
+  document.addEventListener('submit', function (e) {
+    var id = e.target.id;
+    if (id === 'clue-form') {
+      e.preventDefault();
+      var inp = $('#ans'), msg = $('#clue-msg'), row = $('#clue-row');
+      if (matches(inp.value, SPOTS[state.huntStep].alias)) {
+        state.huntStep++; state.wrong = 0;
+        renderHunt();
+        var target = document.getElementById('spot-' + state.huntStep);
+        if (target) {
+          setTimeout(function () {
+            target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+          }, 60);
+        }
+      } else {
+        msg.textContent = WRONG[state.wrong % WRONG.length]; state.wrong++;
+        row.classList.remove('shake'); void row.offsetWidth; row.classList.add('shake');
+        inp.focus(); inp.select();
+      }
+    } else if (id === 'gm-form') {
+      e.preventDefault();
+      var code = $('#gm-code'), gmsg = $('#gm-msg');
+      if (norm(code.value) === 'parijs') {
+        state.test = true; code.value = ''; gmsg.textContent = '';
+        syncGM(); tick();
+      } else {
+        gmsg.textContent = 'Dat is niet de code.';
+      }
+    }
+  });
+
+  function syncGM() {
+    $('#gm-form').hidden = state.test;
+    $('#gm-tools').hidden = !state.test;
+    $('#testpill').hidden = !state.test;
+  }
+  $('#gm-reset').addEventListener('click', function () {
+    state.huntStep = 0; state.wrong = 0;
+    if (slots.a2 === 'open') { renderHunt(); }
+    $('#gm-msg2').textContent = 'Fotoopdracht is gereset.';
+  });
+  $('#gm-off').addEventListener('click', function () {
+    state.test = false; $('#gm-msg2').textContent = ''; syncGM(); tick();
+  });
+
+  /* Adres kopiëren */
+  function selectAddress() {
+    try {
+      var r = document.createRange(); r.selectNodeContents($('#addr'));
+      var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+    } catch (err) { /* geen selectie mogelijk */ }
+  }
+  $('#copy').addEventListener('click', function () {
+    var btn = this, note = $('#copymsg');
+    function ok() {
+      note.textContent = 'Adres gekopieerd.'; btn.textContent = 'Gekopieerd';
+      setTimeout(function () { btn.textContent = 'Kopieer adres'; note.textContent = ''; }, 2200);
+    }
+    function fail() { selectAddress(); note.textContent = 'Kopiëren lukte niet. Het adres is geselecteerd, kopieer het met je telefoon.'; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(ADDRESS).then(ok, fail);
+    } else { fail(); }
+  });
+
+  buildDays();
+  syncGM();
+  tick();
+  setInterval(tick, 1000);
+  document.addEventListener('visibilitychange', tick);
+})();
+</script>
+
+</body>
+</html>
